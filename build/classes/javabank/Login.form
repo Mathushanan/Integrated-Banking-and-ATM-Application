@@ -253,6 +253,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Forgot Password?"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="forgotMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton1">
               <Properties>
@@ -266,7 +269,11 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="SIGN IN"/>
+                <Property name="name" type="java.lang.String" value="signin-btn" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="signinMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
@@ -286,6 +293,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="SIGN UP!"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="signupMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordField1">
               <Properties>
@@ -312,7 +322,7 @@
                 <Property name="name" type="java.lang.String" value="Back" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BackMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="backMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

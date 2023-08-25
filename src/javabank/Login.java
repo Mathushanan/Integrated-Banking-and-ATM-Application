@@ -1,13 +1,13 @@
 
 package javabank;
+import javax.swing.*;
+
 public class Login extends javax.swing.JFrame {
 
-  
     public Login() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,11 +99,22 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 102, 255));
         jLabel6.setText("Forgot Password?");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                forgotMouseClicked(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(241, 40, 25));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("SIGN IN");
+        jButton1.setName("signin-btn"); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signinMouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("New to JavaBank? ");
@@ -111,6 +122,11 @@ public class Login extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 102, 255));
         jLabel8.setText("SIGN UP!");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                signupMouseClicked(evt);
+            }
+        });
 
         jPasswordField1.setBackground(new java.awt.Color(242, 242, 242));
         jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -122,7 +138,7 @@ public class Login extends javax.swing.JFrame {
         jLabel9.setName("Back"); // NOI18N
         jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BackMouseClicked(evt);
+                backMouseClicked(evt);
             }
         });
 
@@ -197,11 +213,27 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackMouseClicked
-       Main m=new Main();
-       m.setVisible(true);
+    private void backMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backMouseClicked
        this.dispose();
-    }//GEN-LAST:event_BackMouseClicked
+       Main obj1=new Main();
+       obj1.setVisible(true);
+    }//GEN-LAST:event_backMouseClicked
+
+    private void signinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signinMouseClicked
+       this.dispose();
+       CustomerDashBoard obj1=new CustomerDashBoard();
+       obj1.setVisible(true);
+    }//GEN-LAST:event_signinMouseClicked
+
+    private void signupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signupMouseClicked
+        this.dispose();
+        Register obj1=new Register();
+        obj1.setVisible(true);
+    }//GEN-LAST:event_signupMouseClicked
+
+    private void forgotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotMouseClicked
+       JOptionPane.showMessageDialog(this,"Please contact your bank!","Forgot password",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_forgotMouseClicked
 
     public static void main(String args[]) {
       
