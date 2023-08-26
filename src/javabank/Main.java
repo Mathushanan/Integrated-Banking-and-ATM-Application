@@ -13,71 +13,121 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        atmBtn = new javax.swing.JButton();
+        cdmBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1090, 590));
+        setSize(new java.awt.Dimension(1090, 590));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("Bank");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javabank/Login background.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javabank/Java logo.png"))); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Agency FB", 1, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(241, 40, 25));
+        jLabel3.setText("Java Bank");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel2)
+                .addContainerGap(19, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(30, 30, 30))
+        );
+
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 0, 410, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setText("A universe of opportunities.");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, 300, 50));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(241, 40, 25));
+        jLabel5.setText("Open to you!");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 250, 50));
+
+        atmBtn.setBackground(new java.awt.Color(241, 40, 25));
+        atmBtn.setForeground(new java.awt.Color(255, 255, 255));
+        atmBtn.setText("ATM");
+        atmBtn.setBorder(null);
+        atmBtn.setPreferredSize(new java.awt.Dimension(80, 30));
+        atmBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                atmBtnMouseClicked(evt);
+            }
+        });
+        getContentPane().add(atmBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, 290, -1));
+
+        cdmBtn.setBackground(new java.awt.Color(241, 40, 25));
+        cdmBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cdmBtn.setText("CDM");
+        cdmBtn.setBorder(null);
+        cdmBtn.setPreferredSize(new java.awt.Dimension(80, 30));
+        cdmBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cdmBtnMouseClicked(evt);
+            }
+        });
+        getContentPane().add(cdmBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 430, 290, -1));
+
+        jButton1.setBackground(new java.awt.Color(241, 40, 25));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("BANK");
+        jButton1.setBorder(null);
+        jButton1.setPreferredSize(new java.awt.Dimension(80, 30));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
-
-        jButton2.setText("Atm");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(100, 100, 100))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(112, 112, 112)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(165, Short.MAX_VALUE))
-        );
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 330, 290, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void atmBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atmBtnMouseClicked
+        this.dispose();
+        Atm obj1=new Atm();
+        obj1.setVisible(true);
+    }//GEN-LAST:event_atmBtnMouseClicked
+
+    private void cdmBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cdmBtnMouseClicked
+        this.dispose();
+        Cdm obj1=new Cdm();
+        obj1.setVisible(true);
+    }//GEN-LAST:event_cdmBtnMouseClicked
+
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        this.dispose();
         Login obj1=new Login();
-        obj1.show();
-        this.dispose();
-        
+        obj1.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        Atm_Cdm obj1=new Atm_Cdm();
-        obj1.show();
-        this.dispose();
-        
-    }//GEN-LAST:event_jButton2MouseClicked
 
 
     public static void main(String args[]) {
@@ -113,7 +163,14 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton atmBtn;
+    private javax.swing.JButton cdmBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
