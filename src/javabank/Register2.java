@@ -98,6 +98,7 @@ public class Register2 extends javax.swing.JFrame {
         finishBtn.setForeground(new java.awt.Color(255, 255, 255));
         finishBtn.setText("FINISH");
         finishBtn.setBorder(null);
+        finishBtn.setFocusable(false);
         finishBtn.setName("signin-btn"); // NOI18N
         finishBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

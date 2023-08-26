@@ -24,7 +24,6 @@ public class Main extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1090, 590));
         setSize(new java.awt.Dimension(1090, 590));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -66,7 +65,7 @@ public class Main extends javax.swing.JFrame {
         jLabel4.setText("A universe of opportunities.");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 160, 300, 50));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(241, 40, 25));
         jLabel5.setText("Open to you!");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 200, 250, 50));
@@ -75,6 +74,7 @@ public class Main extends javax.swing.JFrame {
         atmBtn.setForeground(new java.awt.Color(255, 255, 255));
         atmBtn.setText("ATM");
         atmBtn.setBorder(null);
+        atmBtn.setFocusable(false);
         atmBtn.setPreferredSize(new java.awt.Dimension(80, 30));
         atmBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -87,6 +87,7 @@ public class Main extends javax.swing.JFrame {
         cdmBtn.setForeground(new java.awt.Color(255, 255, 255));
         cdmBtn.setText("CDM");
         cdmBtn.setBorder(null);
+        cdmBtn.setFocusable(false);
         cdmBtn.setPreferredSize(new java.awt.Dimension(80, 30));
         cdmBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -99,6 +100,7 @@ public class Main extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("BANK");
         jButton1.setBorder(null);
+        jButton1.setFocusable(false);
         jButton1.setPreferredSize(new java.awt.Dimension(80, 30));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
