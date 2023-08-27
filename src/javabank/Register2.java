@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Statement;
+import java.sql.ResultSet;
 
 public class Register2 extends javax.swing.JFrame {
 
@@ -267,14 +268,59 @@ public class Register2 extends javax.swing.JFrame {
             });
 
         } else {
-            DatabaseConnection con = new DatabaseConnection();
-            try {
-                Connection connection = con.createConnection();
-               
-                String insertQuery = "INSERT INTO users (firstName,lastName,email,address,dateOfBirth,userName,password,mobile,nic) VALUES('"+fName+"','"+lName+"','"+mail+"','"+Address+"','"+dob+"','"+uName+"','"+pass+"','"+mobile+"','"+nic+"')";
-                Statement statement = connection.createStatement();
 
-                if (statement.executeUpdate(insertQuery) > 0) {
+            if (isAlreadyRegistered(mail, nic)) {
+                SwingUtilities.invokeLater(() -> {
+                    try {
+                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    JOptionPane.showMessageDialog(this, "Email or NIC already exit!", "Warning", JOptionPane.WARNING_MESSAGE);
+
+                });
+
+            } else {
+
+                DatabaseConnection con = new DatabaseConnection();
+                try {
+                    Connection connection = con.createConnection();
+
+                    String insertQuery = "INSERT INTO users (firstName,lastName,email,address,dateOfBirth,userName,password,mobile,nic) VALUES(?,?,?,?,?,?,?,?,?)";
+
+                    PreparedStatement statement = connection.prepareStatement(insertQuery);
+                    statement.setString(1, fName);
+                    statement.setString(2, lName);
+                    statement.setString(3, mail);
+                    statement.setString(4, Address);
+                    statement.setString(5, dob);
+                    statement.setString(6, uName);
+                    statement.setString(7, pass);
+                    statement.setString(8, mobile);
+                    statement.setString(9, nic);
+
+                    if (statement.executeUpdate() > 0) {
+                        SwingUtilities.invokeLater(() -> {
+                            try {
+                                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            JOptionPane.showMessageDialog(
+                                    this,
+                                    "Registration succesfull!",
+                                    "Information",
+                                    JOptionPane.INFORMATION_MESSAGE
+                            );
+                        });
+                        this.dispose();
+                        Login obj1 = new Login();
+                        obj1.setVisible(true);
+
+                    }
+                    connection.close();
+
+                } catch (Exception ex) {
                     SwingUtilities.invokeLater(() -> {
                         try {
                             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -283,37 +329,55 @@ public class Register2 extends javax.swing.JFrame {
                         }
                         JOptionPane.showMessageDialog(
                                 this,
-                                "Registration succesfull!",
-                                "Information",
-                                JOptionPane.INFORMATION_MESSAGE
+                                ex.getMessage() + "!",
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE
                         );
                     });
-                    this.dispose();
-                    Login obj1 = new Login();
-                    obj1.setVisible(true);
-
                 }
 
-            } catch (Exception ex) {
-                SwingUtilities.invokeLater(() -> {
-                    try {
-                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    JOptionPane.showMessageDialog(
-                            this,
-                            ex.getMessage() + "!",
-                            "Information",
-                            JOptionPane.INFORMATION_MESSAGE
-                    );
-                });
             }
 
         }
 
     }//GEN-LAST:event_finishBtnMouseClicked
+    private boolean isAlreadyRegistered(String mail, String nic) {
 
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+
+            String selectQuery = "SELECT * FROM users WHERE email=? || nic=?";
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            statement.setString(1, mail);
+            statement.setString(2, nic);
+
+            ResultSet set = statement.executeQuery();
+            set.next();
+
+            if (set.getInt(1) > 0) {
+                connection.close();
+                set.close();
+                return true;
+            }
+            set.close();
+
+        } catch (Exception ex) {
+            SwingUtilities.invokeLater(() -> {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+            });
+
+        }
+        
+        return false;
+
+    }
     private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
         this.hide();
         Register obj1 = new Register();
@@ -322,10 +386,7 @@ public class Register2 extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -344,11 +405,6 @@ public class Register2 extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Register2().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
