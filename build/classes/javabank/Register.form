@@ -123,7 +123,7 @@
                           <Component id="jLabel12" alignment="1" max="32767" attributes="0"/>
                           <Component id="jLabel13" alignment="1" max="32767" attributes="0"/>
                           <Component id="dateOfBirth" alignment="0" max="32767" attributes="0"/>
-                          <Component id="reEmail2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="reEmail" alignment="0" max="32767" attributes="0"/>
                           <Component id="jLabel14" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -153,7 +153,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="reEmail2" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="reEmail" min="-2" pref="25" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -344,7 +344,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="reEmail2">
+        <Component class="javax.swing.JTextField" name="reEmail">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f2" green="f2" red="f2" type="rgb"/>
