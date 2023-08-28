@@ -35,6 +35,7 @@ public class Atm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1090, 590));
+        setResizable(false);
         setSize(new java.awt.Dimension(1090, 590));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

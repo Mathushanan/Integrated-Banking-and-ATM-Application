@@ -1,7 +1,10 @@
-
 package javabank;
+
 import javax.swing.*;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class Login extends javax.swing.JFrame {
 
@@ -205,35 +208,86 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void signinBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signinBtnMouseClicked
-        
-        if(email.getText().isEmpty()){
-            
+        MessageBox messageBox = new MessageBox();
+
+        String mail = email.getText();
+        String pass = password.getText();
+
+        if (mail.trim().isEmpty() || pass.trim().isEmpty()) {
+            messageBox.getMessageBoxErr(this, "Please fill all the fields!");
+        } else {
+
+            DatabaseConnection con = new DatabaseConnection();
+            try {
+                Connection connection = con.createConnection();
+                String selectQuery = "SELECT COUNT(*) FROM users WHERE email=?";
+
+                PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
+                selectStatement.setString(1, mail);
+                ResultSet selectSet = selectStatement.executeQuery();
+
+                if (selectSet.next()) {
+                    if (selectSet.getInt(1) > 0) {
+
+                        selectSet.close();
+
+                        String passQuery = "SELECT COUNT(*) FROM users WHERE email=? && password=?";
+                        PreparedStatement passStatement = connection.prepareStatement(passQuery);
+                        passStatement.setString(1, mail);
+                        passStatement.setString(2, pass);
+
+                        ResultSet passSet = passStatement.executeQuery();
+
+                        if (passSet.next()) {
+                            if (passSet.getInt(1) > 0) {
+                                
+                                connection.close();
+                                passSet.close();
+                                this.dispose();
+                                CustomerDashBoard obj1 = new CustomerDashBoard();
+                                obj1.setVisible(rootPaneCheckingEnabled);
+
+                            }else{
+                                messageBox.getMessageBoxWar(this, "Check your password!");
+                            }
+
+                        }
+                        passSet.close();
+
+                    } else {
+                        messageBox.getMessageBoxWar(this, "You haven't registered yet!");
+                    }
+                }
+                connection.close();
+                selectSet.close();
+
+            } catch (Exception ex) {
+                messageBox.getMessageBoxErr(this, ex.getMessage() + "!");
+            }
+
         }
-        
-        
-        /*this.dispose();
-        CustomerDashBoard obj1=new CustomerDashBoard();
-        obj1.setVisible(true);*/
+
     }//GEN-LAST:event_signinBtnMouseClicked
 
     private void signupBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_signupBtnMouseClicked
         this.dispose();
-        Register obj1=new Register();
+        Register obj1 = new Register();
         obj1.setVisible(true);
     }//GEN-LAST:event_signupBtnMouseClicked
 
     private void forgotPasswordBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotPasswordBtnMouseClicked
-        JOptionPane.showMessageDialog(this,"Please contact your bank!","Forgot password",JOptionPane.INFORMATION_MESSAGE);
+        MessageBox messageBox = new MessageBox();
+        messageBox.getMessageBoxWar(this, "Please contact your nearest bank!");
     }//GEN-LAST:event_forgotPasswordBtnMouseClicked
 
     private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
         this.dispose();
-        Main obj1=new Main();
+        Main obj1 = new Main();
         obj1.setVisible(true);
     }//GEN-LAST:event_backBtnMouseClicked
 
     public static void main(String args[]) {
-      
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -250,7 +304,7 @@ public class Login extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-      
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);

@@ -54,6 +54,7 @@ public class Register2 extends javax.swing.JFrame {
         agree2CheckBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javabank/Login background.jpg"))); // NOI18N
@@ -223,62 +224,22 @@ public class Register2 extends javax.swing.JFrame {
         String mobile = mobileNumber.getText();
         String nic = nicNumber.getText();
 
+        MessageBox messageBox = new MessageBox();
+
         if (uName.trim().isEmpty() || pass.trim().isEmpty() || rePass.trim().isEmpty() || mobile.trim().isEmpty() || nic.trim().isEmpty()) {
-            SwingUtilities.invokeLater(() -> {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Please fill all the fields!",
-                        "Information",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
-            });
+
+            messageBox.getMessageBoxErr(this, "Please fill all the field!");
 
         } else if (!pass.equals(rePass)) {
-            SwingUtilities.invokeLater(() -> {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Password mismatch!",
-                        "Information",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
-            });
+            messageBox.getMessageBoxErr(this, "Password mismatch!");
+            
         } else if (!agree1CheckBox.isSelected() || !agree2CheckBox.isSelected()) {
-            SwingUtilities.invokeLater(() -> {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                JOptionPane.showMessageDialog(
-                        this,
-                        "You must agree to the terms and conditions!",
-                        "Information",
-                        JOptionPane.INFORMATION_MESSAGE
-                );
-            });
-
+            messageBox.getMessageBoxErr(this, "You must agree to the terms & conditions!");
+            
         } else {
 
             if (isAlreadyRegistered(mail, nic)) {
-                SwingUtilities.invokeLater(() -> {
-                    try {
-                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    JOptionPane.showMessageDialog(this, "Email or NIC already exit!", "Warning", JOptionPane.WARNING_MESSAGE);
-
-                });
+                messageBox.getMessageBoxErr(this, "Email or NIC already exit!");
 
             } else {
 
@@ -300,19 +261,10 @@ public class Register2 extends javax.swing.JFrame {
                     statement.setString(9, nic);
 
                     if (statement.executeUpdate() > 0) {
-                        SwingUtilities.invokeLater(() -> {
-                            try {
-                                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            JOptionPane.showMessageDialog(
-                                    this,
-                                    "Registration succesfull!",
-                                    "Information",
-                                    JOptionPane.INFORMATION_MESSAGE
-                            );
-                        });
+
+                        messageBox.getMessageBoxInfo(this, "Registration succesfull!");
+                        connection.close();
+
                         this.dispose();
                         Login obj1 = new Login();
                         obj1.setVisible(true);
@@ -321,19 +273,7 @@ public class Register2 extends javax.swing.JFrame {
                     connection.close();
 
                 } catch (Exception ex) {
-                    SwingUtilities.invokeLater(() -> {
-                        try {
-                            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        JOptionPane.showMessageDialog(
-                                this,
-                                ex.getMessage() + "!",
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE
-                        );
-                    });
+                    messageBox.getMessageBoxErr(this, ex.getMessage() + "!");
                 }
 
             }
@@ -342,6 +282,7 @@ public class Register2 extends javax.swing.JFrame {
 
     }//GEN-LAST:event_finishBtnMouseClicked
     private boolean isAlreadyRegistered(String mail, String nic) {
+        MessageBox messageBox = new MessageBox();
 
         try {
             DatabaseConnection con = new DatabaseConnection();
@@ -353,28 +294,23 @@ public class Register2 extends javax.swing.JFrame {
             statement.setString(2, nic);
 
             ResultSet set = statement.executeQuery();
-            set.next();
 
-            if (set.getInt(1) > 0) {
-                connection.close();
-                set.close();
-                return true;
+            if (set.next()) {
+                if (set.getInt(1) > 0) {
+                    connection.close();
+                    set.close();
+                    return true;
+                }
             }
+
             set.close();
+            connection.close();
 
         } catch (Exception ex) {
-            SwingUtilities.invokeLater(() -> {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-
-            });
+            messageBox.getMessageBoxErr(this, ex.getMessage() + "!");
 
         }
-        
+
         return false;
 
     }
@@ -386,7 +322,6 @@ public class Register2 extends javax.swing.JFrame {
 
     public static void main(String args[]) {
 
-        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {

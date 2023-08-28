@@ -9,8 +9,14 @@ public class DatabaseConnection{
     
     public Connection createConnection() throws SQLException{
         
-        Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/javaBank?zeroDateTimeBehavior=CONVERT_TO_NULL","root","");
-        return connection;
+        try{
+            Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/javaBank?zeroDateTimeBehavior=CONVERT_TO_NULL","root","");
+            return connection;
+        }catch(Exception ex){
+            System.out.print(ex);
+        }
+        
+        return null;
         
     }
     
