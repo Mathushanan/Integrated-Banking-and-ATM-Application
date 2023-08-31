@@ -2,9 +2,10 @@
 package javabank;
 
 public class ChangePassword extends javax.swing.JFrame {
-
-    public ChangePassword() {
+    private String mail;
+    public ChangePassword(String mail) {
         initComponents();
+        this.mail=mail;
     }
 
     @SuppressWarnings("unchecked")
@@ -24,9 +25,11 @@ public class ChangePassword extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         lastName = new javax.swing.JTextField();
         reEmail = new javax.swing.JTextField();
+        backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1090, 590));
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javabank/Java logo.png"))); // NOI18N
@@ -75,7 +78,6 @@ public class ChangePassword extends javax.swing.JFrame {
         nextBtn.setName("signin-btn"); // NOI18N
 
         firstName.setEditable(false);
-        firstName.setBackground(new java.awt.Color(242, 242, 242));
         firstName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         firstName.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
 
@@ -140,9 +142,23 @@ public class ChangePassword extends javax.swing.JFrame {
 
         getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 400, 310));
 
+        backBtn.setText("jButton1");
+        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backBtnMouseClicked(evt);
+            }
+        });
+        getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 470, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
+        this.dispose();
+        CustomerDashBoard obj1=new CustomerDashBoard(mail);
+        obj1.setVisible(true);
+    }//GEN-LAST:event_backBtnMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -171,12 +187,13 @@ public class ChangePassword extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChangePassword().setVisible(true);
+                new ChangePassword("").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JTextField email;
     private javax.swing.JTextField firstName;
     private javax.swing.JLabel jLabel12;

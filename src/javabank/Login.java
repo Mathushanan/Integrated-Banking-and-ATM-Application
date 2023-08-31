@@ -244,7 +244,7 @@ public class Login extends javax.swing.JFrame {
                                 connection.close();
                                 passSet.close();
                                 this.dispose();
-                                CustomerDashBoard obj1 = new CustomerDashBoard();
+                                CustomerDashBoard obj1 = new CustomerDashBoard(mail);
                                 obj1.setVisible(rootPaneCheckingEnabled);
 
                             }else{
