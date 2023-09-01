@@ -190,19 +190,16 @@ public class CreateAccount extends javax.swing.JFrame {
         String pass = password.getText();
         String rePass = rePassword.getText();
         String Nic = nic.getText();
-        String Amount=amount.getText();
-        
+        String Amount = amount.getText();
+
+        AccountsTableValues obj2 = new AccountsTableValues(mail,this);
+        obj2.assignAccountTableValues(type);
+        boolean isAvailable = obj2.isAccountAvailable();
 
         UserTableValues obj1 = new UserTableValues(mail, this);
         String realPassword = obj1.getStringValue("password");
-        System.out.println(realPassword);
-        System.out.println(pass);
-        
         String realNic = obj1.getStringValue("nic");
         int userId = obj1.getIntValue("userId");
-
-        AccountsTableValues obj2 = new AccountsTableValues(mail, this, type);
-        boolean isAvailable = obj2.isAccountAvailable();
 
         if (type.trim().isEmpty() || pass.trim().isEmpty() || rePass.trim().isEmpty() || Nic.trim().isEmpty() || Amount.trim().isEmpty()) {
             MessageBox messageBox = new MessageBox();
@@ -213,17 +210,53 @@ public class CreateAccount extends javax.swing.JFrame {
         } else if (!realNic.equals(Nic)) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Wrong NIC number!");
-        } else if (realPassword.equals(pass)) {
+        } else if (!realPassword.equals(pass)) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Wrong password!");
         } else if (isAvailable) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "You already have " + type + "!");
-        } else if (Double.parseDouble(Amount)< 2000) {  
+        } else if (Double.parseDouble(Amount) < 2000) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "You should deposit minimum 2000LKR to open a new account!");
         } else {
-            obj2.insertValues(userId, mail, 868798 + userId, Double.parseDouble(Amount), type);
+            if (type == "Savings Account") {
+                if (obj2.insertValues(userId, mail, 200100 + userId, Double.parseDouble(Amount), type)) {
+                    this.dispose();
+                    CustomerDashBoard obj3 = new CustomerDashBoard(mail);
+                    obj3.setVisible(true);
+                    MessageBox messageBox = new MessageBox();
+                    messageBox.getMessageBoxInfo(obj3, "You have sucessfully opened a " + type + "!");
+                } else {
+                    MessageBox messageBox = new MessageBox();
+                    messageBox.getMessageBoxWar(this, "Something went wrong!");
+                }
+
+            } else if (type == "Current Account") {
+                if (obj2.insertValues(userId, mail, 300200 + userId, Double.parseDouble(Amount), type)) {
+                    this.dispose();
+                    CustomerDashBoard obj3 = new CustomerDashBoard(mail);
+                    obj3.setVisible(true);
+                    MessageBox messageBox = new MessageBox();
+                    messageBox.getMessageBoxInfo(obj3, "You have sucessfully opened a " + type + "!");
+                } else {
+                    MessageBox messageBox = new MessageBox();
+                    messageBox.getMessageBoxWar(this, "Something went wrong!");
+                }
+
+            } else {
+                if (obj2.insertValues(userId, mail, 40000 + userId, Double.parseDouble(Amount), type)) {
+                    this.dispose();
+                    CustomerDashBoard obj3 = new CustomerDashBoard(mail);
+                    obj3.setVisible(true);
+                    MessageBox messageBox = new MessageBox();
+                    messageBox.getMessageBoxInfo(obj3, "You have sucessfully opened a " + type + "!");
+                } else {
+                    MessageBox messageBox = new MessageBox();
+                    messageBox.getMessageBoxWar(this, "Something went wrong!");
+                }
+            }
+
         }
 
     }//GEN-LAST:event_submitBtnMouseClicked

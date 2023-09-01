@@ -12,10 +12,11 @@ public class CustomerDashBoard extends javax.swing.JFrame {
     private String mobile;
     private String nic;
     private String userName;
-    
+    private int count;
     public CustomerDashBoard(String mail) {
         initComponents();
         this.mail=mail;
+        this.count=0;
     }
 
    
@@ -362,14 +363,20 @@ public class CustomerDashBoard extends javax.swing.JFrame {
             set.close();
             
             
+            
+            
         }catch(Exception ex){
             MessageBox messageBox=new MessageBox();
             messageBox.getMessageBoxErr(this, ex.toString());
         }
         
+        AccountsTableValues obj1=new AccountsTableValues(mail,this);
+        int totalCountOfAccounts=obj1.getTotalCountOfAccounts();
+        
+        
         nameLabel.setText(fName);
         nicLabel.setText(nic);
-        totalAccountsLabel.setText(mobile);
+        totalAccountsLabel.setText(Integer.toString(totalCountOfAccounts));
     }//GEN-LAST:event_formWindowOpened
 
     private void myProfileBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myProfileBtnMouseClicked

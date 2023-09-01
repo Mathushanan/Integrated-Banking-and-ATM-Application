@@ -40,7 +40,7 @@ public class UserTableValues {
                 this.lName=set.getString("lastName");
                 this.mobile=set.getString("mobile");
                 this.password=set.getString("password");
-                this.nic=set.getString("email");
+                this.nic=set.getString("nic");
             }
             
             set.close();
