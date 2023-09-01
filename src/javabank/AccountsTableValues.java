@@ -16,7 +16,7 @@ public class AccountsTableValues {
     private boolean isAvailable = false;
     private Component form;
 
-    public AccountsTableValues(String mail,Component form) {
+    public AccountsTableValues(String mail, Component form) {
         this.mail = mail;
     }
 
@@ -140,6 +140,34 @@ public class AccountsTableValues {
             messageBox.getMessageBoxErr(form, ex.getMessage());
         }
         return count;
+    }
+
+    public double getBalance(String type) {
+
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+            String selectQuery = "SELECT balance FROM accounts WHERE email=? && type=?";
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            statement.setString(1, mail);
+            statement.setString(2, type);
+            ResultSet set = statement.executeQuery();
+
+            if (set.next()) {
+                double balance = set.getDouble("balance");
+                set.close();
+                connection.close();
+                return balance;
+            }
+            set.close();
+            connection.close();
+
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+        }
+        return 0;
+
     }
 
 }

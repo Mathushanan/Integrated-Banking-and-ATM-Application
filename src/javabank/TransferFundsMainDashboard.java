@@ -20,14 +20,17 @@ public class TransferFundsMainDashboard extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        backBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         currentBtn = new javax.swing.JButton();
         savingsBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        savingsBalanceLabel = new javax.swing.JLabel();
+        fixedBalanceLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         currentBalanceLabel = new javax.swing.JLabel();
+        savingsBtn1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        savingsBalanceLabel = new javax.swing.JLabel();
+        backBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1090, 590));
@@ -71,14 +74,6 @@ public class TransferFundsMainDashboard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 380, 100));
 
-        backBtn.setText("back");
-        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backBtnMouseClicked(evt);
-            }
-        });
-        getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, -1, -1));
-
         currentBtn.setBackground(new java.awt.Color(241, 40, 25));
         currentBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         currentBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -106,22 +101,51 @@ public class TransferFundsMainDashboard extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Available Balance:");
 
-        savingsBalanceLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        savingsBalanceLabel.setText("jLabel4");
+        fixedBalanceLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Available Balance:");
 
         currentBalanceLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        currentBalanceLabel.setText("jLabel4");
+
+        savingsBtn1.setBackground(new java.awt.Color(241, 40, 25));
+        savingsBtn1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        savingsBtn1.setForeground(new java.awt.Color(255, 255, 255));
+        savingsBtn1.setText("FIXED ACCOUNT");
+        savingsBtn1.setBorder(null);
+        savingsBtn1.setFocusable(false);
+        savingsBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                savingsBtn1MouseClicked(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("Available Balance:");
+
+        savingsBalanceLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        backBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(51, 102, 255));
+        backBtn.setText("Back");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(savingsBtn1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(fixedBalanceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(224, 224, 224))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(savingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(398, 398, 398))
@@ -145,27 +169,28 @@ public class TransferFundsMainDashboard extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(currentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(savingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(savingsBalanceLabel)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(currentBalanceLabel))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(savingsBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fixedBalanceLabel)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(1, 1, 1)
+                .addComponent(backBtn)
+                .addGap(14, 14, 14))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 760, 180));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 760, 300));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
-        this.dispose();
-        CustomerDashBoard obj1=new CustomerDashBoard(mail);
-        obj1.setVisible(true);
-        
-    }//GEN-LAST:event_backBtnMouseClicked
 
     private void currentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentBtnMouseClicked
         this.dispose();
@@ -181,15 +206,16 @@ public class TransferFundsMainDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_savingsBtnMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try{
-            DatabaseConnection con=new DatabaseConnection();
-            Connection connection=con.createConnection();
-            String selectQuery="SELECT ";
-        }catch(Exception ex){
-            MessageBox messageBox=new MessageBox();
-            messageBox.getMessageBoxErr(this, ex.getMessage());
-        }
+        AccountsTableValues obj1=new AccountsTableValues(mail,this);
+        savingsBalanceLabel.setText(Double.toString(obj1.getBalance("Savings Account")));
+        currentBalanceLabel.setText(Double.toString(obj1.getBalance("Current Account")));
+        fixedBalanceLabel.setText(Double.toString(obj1.getBalance("Fixed Account")));
+        
     }//GEN-LAST:event_formWindowOpened
+
+    private void savingsBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savingsBtn1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_savingsBtn1MouseClicked
 
    
     public static void main(String args[]) {
@@ -225,16 +251,19 @@ public class TransferFundsMainDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backBtn;
+    private javax.swing.JLabel backBtn;
     private javax.swing.JLabel currentBalanceLabel;
     private javax.swing.JButton currentBtn;
+    private javax.swing.JLabel fixedBalanceLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel savingsBalanceLabel;
     private javax.swing.JButton savingsBtn;
+    private javax.swing.JButton savingsBtn1;
     // End of variables declaration//GEN-END:variables
 }

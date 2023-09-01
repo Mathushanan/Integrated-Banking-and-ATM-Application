@@ -41,6 +41,7 @@ public class UserTableValues {
                 this.mobile=set.getString("mobile");
                 this.password=set.getString("password");
                 this.nic=set.getString("nic");
+                this.userName=set.getString("userName");
             }
             
             set.close();
