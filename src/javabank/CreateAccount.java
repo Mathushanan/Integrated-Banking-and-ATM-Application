@@ -190,40 +190,41 @@ public class CreateAccount extends javax.swing.JFrame {
         String pass = password.getText();
         String rePass = rePassword.getText();
         String Nic = nic.getText();
-        double balance = Double.parseDouble(amount.getText());
+        String Amount=amount.getText();
+        
 
-        if(type.trim().isEmpty() || pass.trim().isEmpty() || rePass.trim().isEmpty()||Nic.trim().isEmpty()||amount.getText().trim().isEmpty()) {
+        UserTableValues obj1 = new UserTableValues(mail, this);
+        String realPassword = obj1.getStringValue("password");
+        System.out.println(realPassword);
+        System.out.println(pass);
+        
+        String realNic = obj1.getStringValue("nic");
+        int userId = obj1.getIntValue("userId");
+
+        AccountsTableValues obj2 = new AccountsTableValues(mail, this, type);
+        boolean isAvailable = obj2.isAccountAvailable();
+
+        if (type.trim().isEmpty() || pass.trim().isEmpty() || rePass.trim().isEmpty() || Nic.trim().isEmpty() || Amount.trim().isEmpty()) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Please fill all the fields!");
-        }else {
-            UserTableValues obj1 = new UserTableValues(mail, this);
-            String realPassword = obj1.getStringValue("password");
-            String realNic = obj1.getStringValue("nic");
-            int userId = obj1.getIntValue("userId");
-
-            AccountsTableValues obj2 = new AccountsTableValues(mail, this, type);
-            boolean isAvailable = obj2.isAccountAvailable();
-
-            if (!password.getText().equals(rePassword.getText())) {
-                MessageBox messageBox = new MessageBox();
-                messageBox.getMessageBoxWar(this, "Password mismatch!");
-            } else if (!realNic.equals(Nic)) {
-                MessageBox messageBox = new MessageBox();
-                messageBox.getMessageBoxWar(this, "Wrong NIC number!");
-            } else if (realPassword.equals(pass)) {
-                MessageBox messageBox = new MessageBox();
-                messageBox.getMessageBoxWar(this, "Wrong password!");
-            } else if (isAvailable) {
-                MessageBox messageBox = new MessageBox();
-                messageBox.getMessageBoxWar(this, "You already have " + type + "!");
-            } else if (balance < 2000) {
-                MessageBox messageBox = new MessageBox();
-                messageBox.getMessageBoxWar(this, "You should deposit minimum 2000LKR to open a new account!");
-            } else {
-                obj2.insertValues(userId, mail, 868798 + userId, balance, type);
-            }
+        } else if (!pass.equals(rePass)) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Password mismatch!");
+        } else if (!realNic.equals(Nic)) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Wrong NIC number!");
+        } else if (realPassword.equals(pass)) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Wrong password!");
+        } else if (isAvailable) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "You already have " + type + "!");
+        } else if (Double.parseDouble(Amount)< 2000) {  
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "You should deposit minimum 2000LKR to open a new account!");
+        } else {
+            obj2.insertValues(userId, mail, 868798 + userId, Double.parseDouble(Amount), type);
         }
-
 
     }//GEN-LAST:event_submitBtnMouseClicked
 

@@ -253,7 +253,7 @@ public class Login extends javax.swing.JFrame {
 
                         }
                         passSet.close();
-
+    
                     } else {
                         messageBox.getMessageBoxWar(this, "You haven't registered yet!");
                     }
