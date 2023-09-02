@@ -241,8 +241,7 @@ public class Login extends javax.swing.JFrame {
                         if (passSet.next()) {
                             if (passSet.getInt(1) > 0) {
                                 
-                                connection.close();
-                                passSet.close();
+                                
                                 this.dispose();
                                 CustomerDashBoard obj1 = new CustomerDashBoard(mail);
                                 obj1.setVisible(rootPaneCheckingEnabled);
@@ -253,6 +252,7 @@ public class Login extends javax.swing.JFrame {
 
                         }
                         passSet.close();
+                        connection.close();
     
                     } else {
                         messageBox.getMessageBoxWar(this, "You haven't registered yet!");

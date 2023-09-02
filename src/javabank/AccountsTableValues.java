@@ -169,5 +169,38 @@ public class AccountsTableValues {
         return 0;
 
     }
+    public String getNameOfAccountNumber(int accNo,Component form){
+        String name="";
+        try{
+            DatabaseConnection con=new DatabaseConnection();
+            Connection connection=con.createConnection();
+            
+            String selectMailQuery="SELECT email FROM accounts WHERE accountNumber=?";
+            String selectNameQuery="SELECT firstName FROM users WHERE email=?";
+            
+            PreparedStatement statement1=connection.prepareStatement(selectMailQuery);
+            PreparedStatement statement2=connection.prepareStatement(selectNameQuery);
+            
+            statement1.setInt(1, accNo);
+            ResultSet mailSet=statement1.executeQuery();
+            String mail="";
+            if(mailSet.next()){
+                mail=mailSet.getString("email");
+            }
+            
+            statement2.setString(1,mail );
+            ResultSet nameSet=statement2.executeQuery();
+            
+            if(nameSet.next()){
+                name=nameSet.getString("firstName");
+            }
+           
+ 
+        }catch(Exception ex){
+            MessageBox messageBox=new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+        }
+         return name;
+    }
 
 }

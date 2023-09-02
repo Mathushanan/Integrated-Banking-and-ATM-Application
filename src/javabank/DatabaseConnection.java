@@ -5,9 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection{
-    
-    
-    public Connection createConnection() throws SQLException{
+  
+    public static Connection createConnection() throws SQLException{
         
         try{
             Connection connection=DriverManager.getConnection("jdbc:mysql://localhost:3306/javaBank?zeroDateTimeBehavior=CONVERT_TO_NULL","root","");
