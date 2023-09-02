@@ -202,5 +202,51 @@ public class AccountsTableValues {
         }
          return name;
     }
+    public boolean updateTransferFunds(double money,String type,int accNo){
+        boolean isUpdated=false;
+        try{
+            DatabaseConnection con=new DatabaseConnection();
+            Connection connection=con.createConnection();
+            
+            String ownerUpdateQuery="UPDATE accounts SET balance=5000 WHERE accountNumber=? AND type=?";
+            String holderUpdateQuery="UPDATE accounts SET balance=2000 WHERE accountNumber=? AND type=?";
+            
+            String balanceQuery="SELECT balance FROM accounts WHERE accountNumber=?";
+            
+            PreparedStatement statement1=connection.prepareStatement(ownerUpdateQuery);
+            PreparedStatement statement2=connection.prepareStatement(holderUpdateQuery);
+            PreparedStatement statement3=connection.prepareStatement(balanceQuery);
+            
+            statement3.setInt(1, accNo);
+            double Balance=0;
+            ResultSet set=statement3.executeQuery();
+            if(set.next()){
+                Balance=set.getDouble("balance");
+            }
+            //statement1.setDouble(1, money);
+            statement1.setInt(1, accountNumber);
+            statement1.setString(2,type);
+            
+            //statement2.setDouble(1,money);
+            statement2.setInt(1, accNo);
+            statement2.setString(2,type);
+            
+            
+            if(statement1.executeUpdate(ownerUpdateQuery)>0&&statement2.executeUpdate(holderUpdateQuery)>0){
+                MessageBox messageBox=new MessageBox();
+                messageBox.getMessageBoxInfo(form, "Transaction Succesfull!");
+                isUpdated=true;
+            }else{
+                MessageBox messageBox=new MessageBox();
+                messageBox.getMessageBoxInfo(form, "Transaction Failed!");
+            }
+            
+        }catch(Exception ex){
+            MessageBox messageBox=new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+            System.out.print(ex);
+        }
+        return isUpdated;
+    }
 
 }

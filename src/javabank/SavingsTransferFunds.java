@@ -186,15 +186,23 @@ public class SavingsTransferFunds extends javax.swing.JFrame {
         } else if (accHolderName.getText().trim().equals("")) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Wrong Account Number!");
-        }else{
-            
+        } else {
+            AccountsTableValues obj1 = new AccountsTableValues(mail, this);
+            obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Savings Account",Integer.parseInt(accountNumber.getText().trim()) );
         }
     }//GEN-LAST:event_submitBtnMouseClicked
 
     private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnMouseClicked
+        AccountsTableValues obj2 = new AccountsTableValues(mail, this);
+        obj2.assignAccountTableValues("Savings Account");
+
         if (accountNumber.getText().trim().isEmpty() || amount.getText().trim().isEmpty()) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Please enter Account number and Amount first!");
+        } else if (obj2.getDoubleValues("balance") < Double.parseDouble(amount.getText().trim())) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Your Account balance is low!");
+
         } else {
             AccountsTableValues obj1 = new AccountsTableValues(mail, this);
             String name = obj1.getNameOfAccountNumber(Integer.parseInt(accountNumber.getText().trim()), this);
