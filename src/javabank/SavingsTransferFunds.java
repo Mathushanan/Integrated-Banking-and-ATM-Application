@@ -175,7 +175,7 @@ public class SavingsTransferFunds extends javax.swing.JFrame {
 
     private void cancelBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtn1MouseClicked
         this.dispose();
-        CustomerDashBoard obj1 = new CustomerDashBoard(mail);
+        TransferFundsMainDashboard obj1 = new  TransferFundsMainDashboard(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_cancelBtn1MouseClicked
 
@@ -188,7 +188,8 @@ public class SavingsTransferFunds extends javax.swing.JFrame {
             messageBox.getMessageBoxWar(this, "Wrong Account Number!");
         } else {
             AccountsTableValues obj1 = new AccountsTableValues(mail, this);
-            obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Savings Account",Integer.parseInt(accountNumber.getText().trim()) );
+            obj1.assignAccountTableValues("Savings Account");
+            obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Savings Account", Integer.parseInt(accountNumber.getText().trim()));
         }
     }//GEN-LAST:event_submitBtnMouseClicked
 
@@ -203,6 +204,11 @@ public class SavingsTransferFunds extends javax.swing.JFrame {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Your Account balance is low!");
 
+        } else if (!obj2.isCorrectAccountType("Savings Account", Integer.parseInt(accountNumber.getText().trim()), this)) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Wrong Account Number!");
+            accountNumber.setText("");
+            amount.setText("");
         } else {
             AccountsTableValues obj1 = new AccountsTableValues(mail, this);
             String name = obj1.getNameOfAccountNumber(Integer.parseInt(accountNumber.getText().trim()), this);

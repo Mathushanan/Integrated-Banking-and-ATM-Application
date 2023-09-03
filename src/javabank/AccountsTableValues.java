@@ -169,84 +169,113 @@ public class AccountsTableValues {
         return 0;
 
     }
-    public String getNameOfAccountNumber(int accNo,Component form){
-        String name="";
-        try{
-            DatabaseConnection con=new DatabaseConnection();
-            Connection connection=con.createConnection();
-            
-            String selectMailQuery="SELECT email FROM accounts WHERE accountNumber=?";
-            String selectNameQuery="SELECT firstName FROM users WHERE email=?";
-            
-            PreparedStatement statement1=connection.prepareStatement(selectMailQuery);
-            PreparedStatement statement2=connection.prepareStatement(selectNameQuery);
-            
+
+    public String getNameOfAccountNumber(int accNo, Component form) {
+        String name = "";
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+
+            String selectMailQuery = "SELECT email FROM accounts WHERE accountNumber=?";
+            String selectNameQuery = "SELECT firstName FROM users WHERE email=?";
+
+            PreparedStatement statement1 = connection.prepareStatement(selectMailQuery);
+            PreparedStatement statement2 = connection.prepareStatement(selectNameQuery);
+
             statement1.setInt(1, accNo);
-            ResultSet mailSet=statement1.executeQuery();
-            String mail="";
-            if(mailSet.next()){
-                mail=mailSet.getString("email");
+            ResultSet mailSet = statement1.executeQuery();
+            String mail = "";
+            if (mailSet.next()) {
+                mail = mailSet.getString("email");
             }
-            
-            statement2.setString(1,mail );
-            ResultSet nameSet=statement2.executeQuery();
-            
-            if(nameSet.next()){
-                name=nameSet.getString("firstName");
+
+            statement2.setString(1, mail);
+            ResultSet nameSet = statement2.executeQuery();
+
+            if (nameSet.next()) {
+                name = nameSet.getString("firstName");
             }
-           
- 
-        }catch(Exception ex){
-            MessageBox messageBox=new MessageBox();
+
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxErr(form, ex.getMessage());
         }
-         return name;
+        return name;
     }
-    public boolean updateTransferFunds(double money,String type,int accNo){
-        boolean isUpdated=false;
-        try{
-            DatabaseConnection con=new DatabaseConnection();
-            Connection connection=con.createConnection();
-            
-            String ownerUpdateQuery="UPDATE accounts SET balance=5000 WHERE accountNumber=? AND type=?";
-            String holderUpdateQuery="UPDATE accounts SET balance=2000 WHERE accountNumber=? AND type=?";
-            
-            String balanceQuery="SELECT balance FROM accounts WHERE accountNumber=?";
-            
-            PreparedStatement statement1=connection.prepareStatement(ownerUpdateQuery);
-            PreparedStatement statement2=connection.prepareStatement(holderUpdateQuery);
-            PreparedStatement statement3=connection.prepareStatement(balanceQuery);
-            
+
+    public boolean updateTransferFunds(double money, String type, int accNo) {
+        boolean isUpdated = false;
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+
+            String ownerUpdateQuery = "UPDATE accounts SET balance=? WHERE accountNumber=? && type=?";
+            String holderUpdateQuery = "UPDATE accounts SET balance=? WHERE accountNumber=? && type=?";
+
+            String balanceQuery = "SELECT balance FROM accounts WHERE accountNumber=?";
+
+            PreparedStatement statement1 = connection.prepareStatement(ownerUpdateQuery);
+            PreparedStatement statement2 = connection.prepareStatement(holderUpdateQuery);
+
+            PreparedStatement statement3 = connection.prepareStatement(balanceQuery);
+
             statement3.setInt(1, accNo);
-            double Balance=0;
-            ResultSet set=statement3.executeQuery();
-            if(set.next()){
-                Balance=set.getDouble("balance");
+            double Balance = 0;
+            ResultSet set = statement3.executeQuery();
+            if (set.next()) {
+                Balance = set.getDouble("balance");
             }
-            //statement1.setDouble(1, money);
-            statement1.setInt(1, accountNumber);
-            statement1.setString(2,type);
-            
-            //statement2.setDouble(1,money);
-            statement2.setInt(1, accNo);
-            statement2.setString(2,type);
-            
-            
-            if(statement1.executeUpdate(ownerUpdateQuery)>0&&statement2.executeUpdate(holderUpdateQuery)>0){
-                MessageBox messageBox=new MessageBox();
+            statement1.setDouble(1, balance - money);
+            statement1.setInt(2, accountNumber);
+            statement1.setString(3, type);
+
+            statement2.setDouble(1, money + Balance);
+            statement2.setInt(2, accNo);
+            statement2.setString(3, type);
+
+            if (statement1.executeUpdate() > 0 && statement2.executeUpdate() > 0) {
+                MessageBox messageBox = new MessageBox();
                 messageBox.getMessageBoxInfo(form, "Transaction Succesfull!");
-                isUpdated=true;
-            }else{
-                MessageBox messageBox=new MessageBox();
+                isUpdated = true;
+            } else {
+                MessageBox messageBox = new MessageBox();
                 messageBox.getMessageBoxInfo(form, "Transaction Failed!");
             }
-            
-        }catch(Exception ex){
-            MessageBox messageBox=new MessageBox();
+
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxErr(form, ex.getMessage());
-            System.out.print(ex);
+
         }
         return isUpdated;
+    }
+
+    public boolean isCorrectAccountType(String Type, int AccNo, Component Form) {
+        boolean isAvailable = false;
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+            String selectQuery = "SELECT COUNT(*) FROM accounts WHERE accountNumber=? && type=?";
+
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            statement.setInt(1, AccNo);
+            statement.setString(2, type);
+
+            ResultSet set = statement.executeQuery();
+            
+            if (set.next()) {
+                if (set.getInt(1) > 0) {
+                    isAvailable = true;
+                }
+            }
+            set.close();
+            connection.close();
+        }catch(Exception ex){
+            MessageBox messageBox=new MessageBox();
+            messageBox.getMessageBoxErr(Form, ex.getMessage());
+        }
+        
+        return isAvailable;
     }
 
 }
