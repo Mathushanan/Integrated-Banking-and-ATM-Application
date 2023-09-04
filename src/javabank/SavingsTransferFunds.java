@@ -175,22 +175,25 @@ public class SavingsTransferFunds extends javax.swing.JFrame {
 
     private void cancelBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtn1MouseClicked
         this.dispose();
-        TransferFundsMainDashboard obj1 = new  TransferFundsMainDashboard(mail);
+        TransferFundsMainDashboard obj1 = new TransferFundsMainDashboard(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_cancelBtn1MouseClicked
 
     private void submitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnMouseClicked
+        AccountsTableValues obj1 = new AccountsTableValues(mail, this);
+        obj1.assignAccountTableValues("Savings Account");
+
         if (accHolderName.getText().trim().isEmpty()) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Please search the Account Number First!");
         } else if (accHolderName.getText().trim().equals("")) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Wrong Account Number!");
-        } else {
-            AccountsTableValues obj1 = new AccountsTableValues(mail, this);
-            obj1.assignAccountTableValues("Savings Account");
-            obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Savings Account", Integer.parseInt(accountNumber.getText().trim()));
+        } else if (obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Savings Account", Integer.parseInt(accountNumber.getText().trim())) && ) {
+
         }
+
+
     }//GEN-LAST:event_submitBtnMouseClicked
 
     private void searchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnMouseClicked

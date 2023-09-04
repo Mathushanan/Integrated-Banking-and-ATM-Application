@@ -18,11 +18,11 @@ public class AccountsTableValues {
 
     public AccountsTableValues(String mail, Component form) {
         this.mail = mail;
+        this.form=form;
     }
 
     public void assignAccountTableValues(String Type) {
-        this.mail = mail;
-        this.form = form;
+       
 
         try {
             DatabaseConnection con = new DatabaseConnection();
@@ -142,7 +142,7 @@ public class AccountsTableValues {
         return count;
     }
 
-    public double getBalance(String type) {
+    public double getBalance(String Type) {
 
         try {
             DatabaseConnection con = new DatabaseConnection();
@@ -150,14 +150,15 @@ public class AccountsTableValues {
             String selectQuery = "SELECT balance FROM accounts WHERE email=? && type=?";
             PreparedStatement statement = connection.prepareStatement(selectQuery);
             statement.setString(1, mail);
-            statement.setString(2, type);
+            statement.setString(2, Type);
             ResultSet set = statement.executeQuery();
 
             if (set.next()) {
                 double balance = set.getDouble("balance");
                 set.close();
                 connection.close();
-                return balance;
+                
+                return balance; 
             }
             set.close();
             connection.close();
@@ -241,12 +242,15 @@ public class AccountsTableValues {
                 MessageBox messageBox = new MessageBox();
                 messageBox.getMessageBoxInfo(form, "Transaction Failed!");
             }
+            connection.close();
+            set.close();
 
         } catch (Exception ex) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxErr(form, ex.getMessage());
 
         }
+        
         return isUpdated;
     }
 
@@ -276,6 +280,31 @@ public class AccountsTableValues {
         }
         
         return isAvailable;
+    }
+    public boolean makeBillPayment(String mail,double Amount){
+        boolean isUpdated=false;
+        try{
+            DatabaseConnection con=new DatabaseConnection();
+            Connection connection=con.createConnection();
+            String balanceQuery="UPDATE accounts SET balance=? WHERE email=? && type=?";
+            
+            PreparedStatement statement1=connection.prepareStatement(balanceQuery);
+            double currentBalance=getDoubleValues("Svaings Account");
+            statement1.setDouble(1, currentBalance-Amount);
+            statement1.setString(2, mail);
+            statement1.setString(3, "Savings Account");
+            
+            if(statement1.executeUpdate()>0){
+                isUpdated=true;
+            }
+            connection.close();
+
+        }catch(Exception ex){
+            MessageBox messageBox=new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+            
+        }
+        return isUpdated; 
     }
 
 }

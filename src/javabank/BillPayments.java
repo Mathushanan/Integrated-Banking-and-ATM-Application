@@ -1,10 +1,15 @@
 package javabank;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 public class BillPayments extends javax.swing.JFrame {
+
     private String mail;
+
     public BillPayments(String mail) {
         initComponents();
-        this.mail=mail;
+        this.mail = mail;
     }
 
     @SuppressWarnings("unchecked")
@@ -27,6 +32,11 @@ public class BillPayments extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1090, 590));
         setPreferredSize(new java.awt.Dimension(1090, 590));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javabank/Java logo.png"))); // NOI18N
@@ -145,19 +155,43 @@ public class BillPayments extends javax.swing.JFrame {
 
     private void cancelBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtn1MouseClicked
         this.dispose();
-        TransferFundsMainDashboard obj1 = new  TransferFundsMainDashboard(mail);
+        TransferFundsMainDashboard obj1 = new TransferFundsMainDashboard(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_cancelBtn1MouseClicked
 
     private void payBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payBtnMouseClicked
-        AccountsTableValues obj1=new AccountsTableValues(mail,this);
-        if(billNumber.getText().trim().isEmpty()||amount.getText().trim().isEmpty()){
-            MessageBox messageBox=new MessageBox();
-            messageBox.getMessageBoxWar(this,"Please fill all the fields!");
-        }else if(obj1.getDoubleValues("balance")<Double.parseDouble(amount.getText().trim())){
-            
+        
+        String BillType=billType.getSelectedItem().toString();
+        AccountsTableValues obj1 = new AccountsTableValues(mail, this);
+        obj1.assignAccountTableValues("Savings Account");
+        int AccNo=obj1.getIntValues("accountNumber");
+        
+        Transactions obj2=new Transactions(mail,this);
+        
+        DateAndTime obj3=new DateAndTime();
+        String dateTime=obj3.getDateAndTime();
+        
+        if (billNumber.getText().trim().isEmpty() || amount.getText().trim().isEmpty()) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Please fill all the fields!");
+        } else if (obj1.getBalance("Savings Account") < Double.parseDouble(amount.getText().trim())) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Your account balance is low!");
+        } else {
+            if (obj1.makeBillPayment(mail, Double.parseDouble(amount.getText().trim()))&& obj2.makeBillTransaction(AccNo, Double.parseDouble(amount.getText().trim()), BillType, dateTime)) {
+                MessageBox messageBox = new MessageBox();
+                messageBox.getMessageBoxInfo(this, "Payment succesfully completed!");
+            }else{
+                MessageBox messageBox = new MessageBox();
+                messageBox.getMessageBoxInfo(this, "Payment failed!");
+            }
+
         }
     }//GEN-LAST:event_payBtnMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+
+    }//GEN-LAST:event_formWindowOpened
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
