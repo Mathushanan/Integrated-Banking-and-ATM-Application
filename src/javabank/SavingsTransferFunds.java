@@ -3,6 +3,8 @@ package javabank;
 public class SavingsTransferFunds extends javax.swing.JFrame {
 
     private String mail;
+    private int AccNo;
+    private double Amount;
 
     public SavingsTransferFunds(String mail) {
         initComponents();
@@ -183,14 +185,22 @@ public class SavingsTransferFunds extends javax.swing.JFrame {
         AccountsTableValues obj1 = new AccountsTableValues(mail, this);
         obj1.assignAccountTableValues("Savings Account");
 
+        Transactions obj2 = new Transactions(mail, this);
+
+        DateAndTime obj3 = new DateAndTime();
+
         if (accHolderName.getText().trim().isEmpty()) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Please search the Account Number First!");
         } else if (accHolderName.getText().trim().equals("")) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Wrong Account Number!");
-        } else if (obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Savings Account", Integer.parseInt(accountNumber.getText().trim())) && ) {
-
+        } else if (obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Savings Account", Integer.parseInt(accountNumber.getText().trim())) && obj2.makeMoneyTransaction(AccNo, Amount, "Savings account money transfer", obj3.getDateAndTime())) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxInfo(this, "Transaction Succesfull!");
+        } else {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Transaction Failed!");
         }
 
 
@@ -213,8 +223,12 @@ public class SavingsTransferFunds extends javax.swing.JFrame {
             accountNumber.setText("");
             amount.setText("");
         } else {
+            this.AccNo = Integer.parseInt(accountNumber.getText().trim());
+            this.Amount = Double.parseDouble(amount.getText().trim());
+
             AccountsTableValues obj1 = new AccountsTableValues(mail, this);
             String name = obj1.getNameOfAccountNumber(Integer.parseInt(accountNumber.getText().trim()), this);
+
             if (name == "") {
                 MessageBox messageBox = new MessageBox();
                 messageBox.getMessageBoxWar(this, "Wrong Account Number!");

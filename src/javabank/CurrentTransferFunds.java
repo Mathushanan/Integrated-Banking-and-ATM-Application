@@ -3,6 +3,8 @@ package javabank;
 public class CurrentTransferFunds extends javax.swing.JFrame {
 
     private String mail;
+    private int AccNo;
+    private double Amount;
 
     public CurrentTransferFunds(String mail) {
         initComponents();
@@ -190,8 +192,12 @@ public class CurrentTransferFunds extends javax.swing.JFrame {
             accountNumber.setText("");
             amount.setText("");
         } else {
+            this.AccNo=Integer.parseInt(accountNumber.getText().trim());
+            this.Amount=Double.parseDouble(amount.getText().trim());
+            
             AccountsTableValues obj1 = new AccountsTableValues(mail, this);
             String name = obj1.getNameOfAccountNumber(Integer.parseInt(accountNumber.getText().trim()), this);
+            
             if (name == "") {
                 MessageBox messageBox = new MessageBox();
                 messageBox.getMessageBoxWar(this, "Wrong Account Number!");
@@ -206,21 +212,30 @@ public class CurrentTransferFunds extends javax.swing.JFrame {
 
     private void cancelBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtn1MouseClicked
         this.dispose();
-        TransferFundsMainDashboard obj1 = new  TransferFundsMainDashboard(mail);
+        TransferFundsMainDashboard obj1 = new TransferFundsMainDashboard(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_cancelBtn1MouseClicked
 
     private void submitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnMouseClicked
+        AccountsTableValues obj1 = new AccountsTableValues(mail, this);
+        obj1.assignAccountTableValues("Current Account");
+        
+        Transactions obj2=new Transactions(mail,this);
+        
+        DateAndTime obj3=new DateAndTime();
+
         if (accHolderName.getText().trim().isEmpty()) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Please search the Account Number First!");
         } else if (accHolderName.getText().trim().equals("")) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Wrong Account Number!");
-        } else {
-            AccountsTableValues obj1 = new AccountsTableValues(mail, this);
-            obj1.assignAccountTableValues("Current Account");
-            obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Current Account", Integer.parseInt(accountNumber.getText().trim()));
+        } else if(obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Current Account", Integer.parseInt(accountNumber.getText().trim()))&& obj2.makeMoneyTransaction(AccNo, Amount, "Current account money transfer", obj3.getDateAndTime()) ) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxInfo(this, "transaction Succesfull!");
+        }else{
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "transaction Failedl!");
         }
     }//GEN-LAST:event_submitBtnMouseClicked
 
