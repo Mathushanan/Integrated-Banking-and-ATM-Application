@@ -155,7 +155,7 @@ public class BillPayments extends javax.swing.JFrame {
 
     private void cancelBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtn1MouseClicked
         this.dispose();
-        TransferFundsMainDashboard obj1 = new TransferFundsMainDashboard(mail);
+        CustomerDashBoard obj1 = new CustomerDashBoard(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_cancelBtn1MouseClicked
 

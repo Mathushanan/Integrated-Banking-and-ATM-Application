@@ -1,13 +1,26 @@
-
 package javabank;
+
+import com.mysql.cj.jdbc.result.ResultSetMetaData;
+import javax.swing.table.*;
+import java.sql.ResultSet;
+import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 
 public class TransactionHistory extends javax.swing.JFrame {
 
-   private String mail;
+    private String mail;
+
     public TransactionHistory(String mail) {
         initComponents();
-        this.mail=mail;
+        this.mail = mail;
     }
 
     @SuppressWarnings("unchecked")
@@ -17,8 +30,9 @@ public class TransactionHistory extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        transactionTable = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        dataTable = new javax.swing.JTable();
+        backBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1090, 590));
@@ -61,10 +75,7 @@ public class TransactionHistory extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 380, 100));
 
-        jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(241, 40, 25), 1, true));
-
-        transactionTable.setBackground(new java.awt.Color(242, 242, 242));
-        transactionTable.setModel(new javax.swing.table.DefaultTableModel(
+        dataTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,33 +83,46 @@ public class TransactionHistory extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Date & Time", "Account Number", "Amount", "Type"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
+        ));
+        dataTable.setEnabled(false);
+        jScrollPane2.setViewportView(dataTable);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 910, 380));
+
+        backBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        backBtn.setForeground(new java.awt.Color(51, 102, 255));
+        backBtn.setText("Back");
+        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backBtnMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(transactionTable);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 930, -1));
+        getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 500, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Transactions obj1=new Transactions(mail,this);
-        DefaultTableModel model=transactionTable.getModel();
-        transactionTable obj1.getTransactionHistory();
-        
+        Transactions obj1 = new Transactions(mail, this);
+        dataTable.setModel(obj1.getTransactionTableModel());
+
+        dataTable.getColumnModel().getColumn(0).setHeaderValue("Account Number");
+        dataTable.getColumnModel().getColumn(1).setHeaderValue("Amount");
+        dataTable.getColumnModel().getColumn(2).setHeaderValue("Type");
+        dataTable.getColumnModel().getColumn(3).setHeaderValue("Date Time");
+
     }//GEN-LAST:event_formWindowOpened
 
-   
+    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
+        this.dispose();
+        CustomerDashBoard obj1 = new CustomerDashBoard(mail);
+        obj1.setVisible(rootPaneCheckingEnabled);
+
+    }//GEN-LAST:event_backBtnMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -132,10 +156,11 @@ public class TransactionHistory extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backBtn;
+    private javax.swing.JTable dataTable;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable transactionTable;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

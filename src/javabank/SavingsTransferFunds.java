@@ -195,7 +195,7 @@ public class SavingsTransferFunds extends javax.swing.JFrame {
         } else if (accHolderName.getText().trim().equals("")) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Wrong Account Number!");
-        } else if (obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Savings Account", Integer.parseInt(accountNumber.getText().trim())) && obj2.makeMoneyTransaction(AccNo, Amount, "Savings account money transfer", obj3.getDateAndTime())) {
+        } else if (obj1.updateTransferFunds(Double.parseDouble(amount.getText().trim()), "Savings Account", Integer.parseInt(accountNumber.getText().trim())) && obj2.makeMoneyTransaction(AccNo, Amount, "Savings account money transfer", obj3.getDateAndTime())&&obj2.updateRecipientTransaction(AccNo, Amount, "Savings account money received",obj3.getDateAndTime(),this )) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxInfo(this, "Transaction Succesfull!");
         } else {

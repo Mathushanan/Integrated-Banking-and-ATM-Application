@@ -306,5 +306,27 @@ public class AccountsTableValues {
         }
         return isUpdated; 
     }
-
+    public String findMailByAccountNumber(int AccNo){
+        String mail=null;
+        try{
+            DatabaseConnection con=new DatabaseConnection();
+            Connection connection=con.createConnection();
+            String selectQuery="SELECT email FROM accounts WHERE accountNumber=?";
+            
+            PreparedStatement statement=connection.prepareStatement(selectQuery);
+            statement.setInt(1,AccNo);
+            
+            ResultSet set=statement.executeQuery();
+            if(set.next()){
+                mail=set.getString("email");
+            }
+            set.close();
+            connection.close();
+        }catch(Exception ex){
+            MessageBox messageBox=new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+            
+        }
+        return mail;
+    }
 }
