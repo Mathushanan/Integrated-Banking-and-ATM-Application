@@ -13,24 +13,28 @@ public class MobileRecharge extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        backBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        label = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        amount = new javax.swing.JTextField();
+        mobileNumber = new javax.swing.JTextField();
+        cancelBtn1 = new javax.swing.JLabel();
+        reloadBtn = new javax.swing.JButton();
+        simType = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1090, 590));
         setPreferredSize(new java.awt.Dimension(1090, 590));
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        backBtn.setText("jButton1");
-        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backBtnMouseClicked(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
-        getContentPane().add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 176, -1, -1));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javabank/Java logo.png"))); // NOI18N
 
@@ -63,16 +67,119 @@ public class MobileRecharge extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 380, 100));
 
+        jPanel4.setEnabled(false);
+
+        label.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        label.setText("Mobile Number");
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Amount");
+
+        amount.setBackground(new java.awt.Color(242, 242, 242));
+        amount.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        amount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        mobileNumber.setBackground(new java.awt.Color(242, 242, 242));
+        mobileNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        mobileNumber.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        mobileNumber.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+
+        cancelBtn1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cancelBtn1.setForeground(new java.awt.Color(51, 102, 255));
+        cancelBtn1.setText("Cancel");
+        cancelBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelBtn1MouseClicked(evt);
+            }
+        });
+
+        reloadBtn.setBackground(new java.awt.Color(241, 40, 25));
+        reloadBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        reloadBtn.setForeground(new java.awt.Color(255, 255, 255));
+        reloadBtn.setText("RELOAD");
+        reloadBtn.setBorder(null);
+        reloadBtn.setFocusable(false);
+        reloadBtn.setName("signin-btn"); // NOI18N
+        reloadBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reloadBtnMouseClicked(evt);
+            }
+        });
+
+        simType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dialog", "Airtel", "Mobitel", "Hutch" }));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(cancelBtn1)
+                    .addComponent(label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mobileNumber)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(amount)
+                    .addComponent(reloadBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(simType, 0, 328, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addComponent(simType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mobileNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(reloadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cancelBtn1)
+                .addGap(86, 86, 86))
+        );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, 420, 350));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
+    private void cancelBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtn1MouseClicked
         this.dispose();
-        CustomerDashBoard obj1=new CustomerDashBoard(mail);
+        CustomerDashBoard obj1 = new CustomerDashBoard(mail);
         obj1.setVisible(true);
+    }//GEN-LAST:event_cancelBtn1MouseClicked
+
+    private void reloadBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reloadBtnMouseClicked
+
+        String connectionType=simType.getSelectedItem().toString();
+        String reloadAmount=amount.getText().trim();
+        String number=mobileNumber.getText().trim();
         
-    }//GEN-LAST:event_backBtnMouseClicked
+        String Prefix077=number.substring(0,3);
+        String Prefix77=number.substring(0,2);
+        String Prefix0094=number.substring(0,5);
+        
+        if(reloadAmount.isEmpty()||number.isEmpty()){
+            MessageBox messageBox=new MessageBox();
+            messageBox.getMessageBoxWar(this, "Please fill all the fields!");
+        }else if(Double.parseDouble(reloadAmount)<5){
+            MessageBox messageBox=new MessageBox();
+            messageBox.getMessageBoxWar(this, "You can reload more than 5/= only!");
+        }else if(){
+            
+        }
+    }//GEN-LAST:event_reloadBtnMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+    }//GEN-LAST:event_formWindowOpened
 
    
     public static void main(String args[]) {
@@ -108,9 +215,16 @@ public class MobileRecharge extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backBtn;
+    private javax.swing.JTextField amount;
+    private javax.swing.JLabel cancelBtn1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel label;
+    private javax.swing.JTextField mobileNumber;
+    private javax.swing.JButton reloadBtn;
+    private javax.swing.JComboBox<String> simType;
     // End of variables declaration//GEN-END:variables
 }

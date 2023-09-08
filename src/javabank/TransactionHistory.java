@@ -1,18 +1,6 @@
 package javabank;
 
-import com.mysql.cj.jdbc.result.ResultSetMetaData;
-import javax.swing.table.*;
-import java.sql.ResultSet;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Vector;
+
 
 public class TransactionHistory extends javax.swing.JFrame {
 
