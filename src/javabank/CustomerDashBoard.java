@@ -1,5 +1,5 @@
-
 package javabank;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
@@ -13,13 +13,13 @@ public class CustomerDashBoard extends javax.swing.JFrame {
     private String nic;
     private String userName;
     private int count;
+
     public CustomerDashBoard(String mail) {
         initComponents();
-        this.mail=mail;
-        this.count=0;
+        this.mail = mail;
+        this.count = 0;
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -36,10 +36,13 @@ public class CustomerDashBoard extends javax.swing.JFrame {
         changePasswordBtn = new javax.swing.JButton();
         myProfileBtn = new javax.swing.JButton();
         createAccountBtn = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        activatePanel = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        activateBtn = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         nameLabel = new javax.swing.JLabel();
         totalAccountsLabel = new javax.swing.JLabel();
         nicLabel = new javax.swing.JLabel();
@@ -226,16 +229,58 @@ public class CustomerDashBoard extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 760, 340));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        activatePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setText("Name");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Activate Your ATM Card!");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Total acoounts");
+        activateBtn.setBackground(new java.awt.Color(0, 153, 51));
+        activateBtn.setForeground(new java.awt.Color(255, 255, 255));
+        activateBtn.setText("ACTIVATE");
+        activateBtn.setBorder(null);
+        activateBtn.setFocusable(false);
+        activateBtn.setPreferredSize(new java.awt.Dimension(80, 30));
+        activateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                activateBtnMouseClicked(evt);
+            }
+        });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("NIC");
+        javax.swing.GroupLayout activatePanelLayout = new javax.swing.GroupLayout(activatePanel);
+        activatePanel.setLayout(activatePanelLayout);
+        activatePanelLayout.setHorizontalGroup(
+            activatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(activatePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(activateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
+            .addGroup(activatePanelLayout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+        activatePanelLayout.setVerticalGroup(
+            activatePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(activatePanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addComponent(activateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+        );
+
+        getContentPane().add(activatePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 10, 280, 140));
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel7.setText("Name");
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setText("Total acoounts");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setText("NIC");
 
         logoutBtn.setBackground(new java.awt.Color(0, 153, 51));
         logoutBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -249,134 +294,127 @@ public class CustomerDashBoard extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(totalAccountsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nicLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(10, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
                     .addComponent(nameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
                     .addComponent(totalAccountsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
                     .addComponent(nicLabel))
-                .addGap(18, 18, 18)
-                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 140));
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 280, 140));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void changePasswordBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changePasswordBtnMouseClicked
-       this.dispose();
-       ChangePassword obj1=new ChangePassword(mail);
-       obj1.setVisible(true);
+        this.dispose();
+        ChangePassword obj1 = new ChangePassword(mail);
+        obj1.setVisible(true);
     }//GEN-LAST:event_changePasswordBtnMouseClicked
 
     private void transactionHistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transactionHistoryMouseClicked
-       this.dispose();
-       TransactionHistory obj1=new TransactionHistory(mail);
-       obj1.setVisible(true);
+        this.dispose();
+        TransactionHistory obj1 = new TransactionHistory(mail);
+        obj1.setVisible(true);
     }//GEN-LAST:event_transactionHistoryMouseClicked
 
     private void transferFundsBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_transferFundsBtnMouseClicked
         this.dispose();
-        TransferFundsMainDashboard obj1=new TransferFundsMainDashboard(mail);
+        TransferFundsMainDashboard obj1 = new TransferFundsMainDashboard(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_transferFundsBtnMouseClicked
 
     private void billPaymentsBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billPaymentsBtnMouseClicked
         this.dispose();
-        BillPayments obj1=new BillPayments(mail);
+        BillPayments obj1 = new BillPayments(mail);
         obj1.setVisible(true);
-        
+
     }//GEN-LAST:event_billPaymentsBtnMouseClicked
 
     private void balanceInqueryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_balanceInqueryMouseClicked
         this.dispose();
-        BalanceInquery obj1=new BalanceInquery(mail);
+        BalanceInquery obj1 = new BalanceInquery(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_balanceInqueryMouseClicked
 
     private void mobileRechargeBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mobileRechargeBtnMouseClicked
         this.dispose();
-        MobileRecharge obj1=new MobileRecharge(mail);
+        MobileRecharge obj1 = new MobileRecharge(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_mobileRechargeBtnMouseClicked
 
-    private void logoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnMouseClicked
-        this.dispose();
-        Login obj1=new Login();
-        obj1.setVisible(true);
-        
-    }//GEN-LAST:event_logoutBtnMouseClicked
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try{
-            DatabaseConnection con=new DatabaseConnection();
-            Connection connection=con.createConnection();
-            String selectQuery="SELECT * FROM users WHERE email=?";
-            PreparedStatement statement=connection.prepareStatement(selectQuery);
+        AtmOperations obj2=new AtmOperations(mail,this);
+        if (obj2.isAlreadyActivated()) {
+            activatePanel.setVisible(false);
+        }
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+            String selectQuery = "SELECT * FROM users WHERE email=?";
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
             statement.setString(1, mail);
-            
-            ResultSet set=statement.executeQuery();
-            
-            if(set.next()){
-                this.mobile=set.getString("mobile");
-                this.fName=set.getString("firstName");
-                this.lName=set.getString("lastName");
-                this.userName=set.getString("userName");
-                this.nic=set.getString("nic");
+
+            ResultSet set = statement.executeQuery();
+
+            if (set.next()) {
+                this.mobile = set.getString("mobile");
+                this.fName = set.getString("firstName");
+                this.lName = set.getString("lastName");
+                this.userName = set.getString("userName");
+                this.nic = set.getString("nic");
             }
             connection.close();
             set.close();
-            
-            
-            
-            
-        }catch(Exception ex){
-            MessageBox messageBox=new MessageBox();
+
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxErr(this, ex.toString());
         }
-        
-        AccountsTableValues obj1=new AccountsTableValues(mail,this);
-        int totalCountOfAccounts=obj1.getTotalCountOfAccounts();
-        
-        
+
+        AccountsTableValues obj1 = new AccountsTableValues(mail, this);
+        int totalCountOfAccounts = obj1.getTotalCountOfAccounts();
+
         nameLabel.setText(fName);
         nicLabel.setText(nic);
         totalAccountsLabel.setText(Integer.toString(totalCountOfAccounts));
@@ -384,15 +422,31 @@ public class CustomerDashBoard extends javax.swing.JFrame {
 
     private void myProfileBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myProfileBtnMouseClicked
         this.dispose();
-        MyProfile obj1=new MyProfile(mail);
+        MyProfile obj1 = new MyProfile(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_myProfileBtnMouseClicked
 
     private void createAccountBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createAccountBtnMouseClicked
         this.dispose();
-        CreateAccount obj1=new CreateAccount(mail);
+        CreateAccount obj1 = new CreateAccount(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_createAccountBtnMouseClicked
+
+    private void activateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_activateBtnMouseClicked
+        AtmOperations obj1 = new AtmOperations(mail, this);
+        if (obj1.activateAtm()) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxInfo(this, "Your ATM card successfully activated!");
+            activatePanel.setVisible(false);
+        }
+    }//GEN-LAST:event_activateBtnMouseClicked
+
+    private void logoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnMouseClicked
+        this.dispose();
+        Login obj1 = new Login();
+        obj1.setVisible(true);
+
+    }//GEN-LAST:event_logoutBtnMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -427,18 +481,21 @@ public class CustomerDashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton activateBtn;
+    private javax.swing.JPanel activatePanel;
     private javax.swing.JButton balanceInquery;
     private javax.swing.JButton billPaymentsBtn;
     private javax.swing.JButton changePasswordBtn;
     private javax.swing.JButton createAccountBtn;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton mobileRechargeBtn;
     private javax.swing.JButton myProfileBtn;
