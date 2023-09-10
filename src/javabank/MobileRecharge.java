@@ -1,14 +1,16 @@
-
 package javabank;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class MobileRecharge extends javax.swing.JFrame {
+
     private String mail;
+
     public MobileRecharge(String mail) {
         initComponents();
-        this.mail=mail;
+        this.mail = mail;
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -107,6 +109,11 @@ public class MobileRecharge extends javax.swing.JFrame {
         });
 
         simType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dialog", "Airtel", "Mobitel", "Hutch" }));
+        simType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simTypeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -155,33 +162,68 @@ public class MobileRecharge extends javax.swing.JFrame {
         CustomerDashBoard obj1 = new CustomerDashBoard(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_cancelBtn1MouseClicked
-
+    String connectionType;
     private void reloadBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reloadBtnMouseClicked
 
-        String connectionType=simType.getSelectedItem().toString();
-        String reloadAmount=amount.getText().trim();
-        String number=mobileNumber.getText().trim();
+        String reloadAmount = amount.getText().trim();
+        String number = mobileNumber.getText().trim();
         
-        String Prefix077=number.substring(0,3);
-        String Prefix77=number.substring(0,2);
-        String Prefix0094=number.substring(0,5);
+        AccountsTableValues obj1=new AccountsTableValues(mail,this);
+        obj1.assignAccountTableValues("Savings Account");
         
-        if(reloadAmount.isEmpty()||number.isEmpty()){
-            MessageBox messageBox=new MessageBox();
+        Transactions obj2=new Transactions(mail,this);
+
+        if (reloadAmount.isEmpty() || number.isEmpty()) {
+            MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Please fill all the fields!");
-        }else if(Double.parseDouble(reloadAmount)<5){
-            MessageBox messageBox=new MessageBox();
+        } else if (Double.parseDouble(reloadAmount) < 5) {
+            MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "You can reload more than 5/= only!");
-        }else if(){
-            
+        } else if (mobileNumber.getText().trim().length() > 10 || mobileNumber.getText().trim().length() < 10||!isValidMobileNumber(mobileNumber.getText().trim())) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Invalid mobile number!");
+        }else if(obj1.getDoubleValues("balance")<Double.parseDouble(reloadAmount)){
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Your acoount balance is low!");
+        }else if(obj1.makeMobileRecharge(Double.parseDouble(reloadAmount))&&obj2.updateMobileRechargeTransaction(Double.parseDouble(reloadAmount), number)){
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Reload succefully completed!");
+            amount.setText("");
+            mobileNumber.setText("");
+        }else{
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Reload failed!");
         }
     }//GEN-LAST:event_reloadBtnMouseClicked
-
+     public boolean isValidMobileNumber(String Number) {
+        String regex = "^[0-9]+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(Number);
+        return matcher.find();
+    }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
+
     }//GEN-LAST:event_formWindowOpened
 
-   
+    private void simTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simTypeActionPerformed
+        connectionType = simType.getSelectedItem().toString();
+        switch (connectionType) {
+            case "Dialog":
+                mobileNumber.setText("077");
+                break;
+            case "Mobitel":
+                mobileNumber.setText("071");
+                break;
+            case "Hutch":
+                mobileNumber.setText("078");
+                break;
+            case "Airtel":
+                mobileNumber.setText("075");
+                break;
+        }
+    }//GEN-LAST:event_simTypeActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

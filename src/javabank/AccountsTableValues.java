@@ -329,4 +329,26 @@ public class AccountsTableValues {
         }
         return mail;
     }
+    public boolean makeMobileRecharge(Double Amount){
+        boolean isUpdated=false;
+        try{
+            DatabaseConnection con=new DatabaseConnection();
+            Connection connection=con.createConnection();
+            String updateQuery="UPDATE accounts SET balance=? WHERE email=? && type=?";
+            PreparedStatement statement=connection.prepareStatement(updateQuery);
+            
+            statement.setDouble(1,getBalance("Savings Account")-Amount);
+            statement.setString(2,mail);
+            statement.setString(3, "Savings Account");
+            
+            if(statement.executeUpdate()>0){
+                isUpdated=true;
+            }
+            connection.close();
+        }catch(Exception ex){
+            MessageBox messageBox=new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+        }
+        return isUpdated;
+    }
 }
