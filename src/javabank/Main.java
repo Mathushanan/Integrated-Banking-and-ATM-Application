@@ -116,7 +116,7 @@ public class Main extends javax.swing.JFrame {
 
     private void atmBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atmBtnMouseClicked
         this.dispose();
-        Atm obj1=new Atm();
+        AtmLogin obj1=new AtmLogin();
         obj1.setVisible(true);
     }//GEN-LAST:event_atmBtnMouseClicked
 

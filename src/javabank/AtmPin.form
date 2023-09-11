@@ -103,8 +103,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="enterBtn1" min="-2" pref="290" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="290" max="-2" attributes="0"/>
+                      <Component id="submitBtn" min="-2" pref="290" max="-2" attributes="0"/>
+                      <Component id="atmPin" min="-2" pref="290" max="-2" attributes="0"/>
                       <Component id="cancelBtn" min="-2" pref="290" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="42" max="32767" attributes="0"/>
@@ -117,9 +117,9 @@
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="30" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" pref="80" max="-2" attributes="0"/>
+                  <Component id="atmPin" min="-2" pref="80" max="-2" attributes="0"/>
                   <EmptySpace pref="43" max="32767" attributes="0"/>
-                  <Component id="enterBtn1" min="-2" max="-2" attributes="0"/>
+                  <Component id="submitBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="cancelBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
@@ -136,7 +136,7 @@
             <Property name="text" type="java.lang.String" value="Enter your Pin"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="atmPin">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="48" style="0"/>
@@ -171,7 +171,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cancelBtnMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="enterBtn1">
+        <Component class="javax.swing.JButton" name="submitBtn">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="19" green="28" red="f1" type="rgb"/>
@@ -189,7 +189,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="enterBtn1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="submitBtnMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

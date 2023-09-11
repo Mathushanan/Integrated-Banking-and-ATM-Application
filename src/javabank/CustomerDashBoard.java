@@ -384,7 +384,7 @@ public class CustomerDashBoard extends javax.swing.JFrame {
     }//GEN-LAST:event_mobileRechargeBtnMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        AtmOperations obj2=new AtmOperations(mail,this);
+        AtmOperations obj2 = new AtmOperations(mail, this);
         if (obj2.isAlreadyActivated()) {
             activatePanel.setVisible(false);
         }
@@ -434,11 +434,20 @@ public class CustomerDashBoard extends javax.swing.JFrame {
 
     private void activateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_activateBtnMouseClicked
         AtmOperations obj1 = new AtmOperations(mail, this);
-        if (obj1.activateAtm()) {
+        AccountsTableValues obj2 = new AccountsTableValues(mail, this);
+
+        if (!obj2.isAccountAvailableHere("Savings Account")) {
             MessageBox messageBox = new MessageBox();
-            messageBox.getMessageBoxInfo(this, "Your ATM card successfully activated!");
-            activatePanel.setVisible(false);
+            messageBox.getMessageBoxInfo(this, "You don't have a Savings Account!");
+        } else {
+            if (obj1.activateAtm()) {
+                MessageBox messageBox = new MessageBox();
+                messageBox.getMessageBoxInfo(this, "Your ATM card successfully activated! \n Your PIN number is " + obj1.getAtmPin());
+                activatePanel.setVisible(false);
+            }
+
         }
+
     }//GEN-LAST:event_activateBtnMouseClicked
 
     private void logoutBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnMouseClicked
