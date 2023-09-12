@@ -155,6 +155,8 @@ public class AtmPinChange extends javax.swing.JFrame {
         String currentPin = cPin.getText().trim();
         String newPin = nPin.getText().trim();
         String confirmPin = rePin.getText().trim();
+        
+        AtmOperations obj1=new AtmOperations(mail,this);
 
         if (currentPin.isEmpty() || newPin.isEmpty() || confirmPin.isEmpty()) {
             MessageBox messageBox = new MessageBox();
@@ -169,9 +171,21 @@ public class AtmPinChange extends javax.swing.JFrame {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Your new PIN must be in 4 digits!");
 
-        } else {
-            
-
+        } else if(obj1.getAtmPin()!=Integer.parseInt(currentPin)){
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Wrong current PIN number!");
+        }else if(obj1.isAtmPinExit(Integer.parseInt(newPin))){
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Try with diferent PIN number!");
+        }else if(obj1.updateAtmPin(Integer.parseInt(newPin))){
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxInfo(this, "Your new PIN updated!");
+            this.dispose();
+            AtmDashBoard obj2=new AtmDashBoard(mail);
+            obj2.setVisible(true);
+        }else{
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Failed to update your new PIN!");
         }
     }//GEN-LAST:event_submitBtnMouseClicked
 

@@ -69,10 +69,13 @@ public class Transactions {
         return isInserted;
     }
 
-    public boolean updateRecipientTransaction(int AccNo, double Amount, String Type, String DateTime, Component form) {
+    public boolean updateRecipientTransaction(int AccNo,double Amount, String Type, String DateTime, Component form) {
 
         AccountsTableValues obj1 = new AccountsTableValues(mail, form);
+        obj1.assignAccountTableValues("Savings Account");
         String recipientMail = obj1.findMailByAccountNumber(AccNo);
+        
+        int myAccNo=obj1.getIntValues("accountNumber");
 
         boolean isInserted = false;
         try {
@@ -81,7 +84,7 @@ public class Transactions {
             String insertQuery = "INSERT INTO transaction (email,accountNumber,amount,type,dateAndTime) VALUES (?,?,?,?,?)";
             PreparedStatement statement = connection.prepareStatement(insertQuery);
             statement.setString(1, recipientMail);
-            statement.setInt(2, AccNo);
+            statement.setInt(2, myAccNo);
             statement.setDouble(3, Amount);
             statement.setString(4, Type);
             statement.setString(5, DateTime);
@@ -139,13 +142,14 @@ public class Transactions {
         try{
             DatabaseConnection con=new DatabaseConnection();
             Connection connection=con.createConnection();
-            String selectQuery="SELECT accountNumber,amount,type,dateAndTime FROM transaction WHERE accountNumber LIKE ? || amount LIKE ? || type LIKE ? || dateAndTime LIKE ?";
+            String selectQuery="SELECT accountNumber,amount,type,dateAndTime FROM transaction WHERE (accountNumber LIKE ? || amount LIKE ? || type LIKE ? || dateAndTime LIKE ?) && email=?";
             PreparedStatement statement=connection.prepareStatement(selectQuery);
             searchKey="%"+searchKey+"%";
             statement.setString(1,searchKey);
             statement.setString(2,searchKey);
             statement.setString(3,searchKey);
             statement.setString(4,searchKey);
+            statement.setString(5,mail);
             
             ResultSet set=statement.executeQuery();
             ResultSetMetaData rsmd=(ResultSetMetaData)set.getMetaData();

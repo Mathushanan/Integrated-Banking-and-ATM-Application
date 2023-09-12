@@ -234,12 +234,7 @@ public class AccountsTableValues {
             statement2.setString(3, type);
 
             if (statement1.executeUpdate() > 0 && statement2.executeUpdate() > 0) {
-                MessageBox messageBox = new MessageBox();
-                messageBox.getMessageBoxInfo(form, "Transaction Succesfull!");
                 isUpdated = true;
-            } else {
-                MessageBox messageBox = new MessageBox();
-                messageBox.getMessageBoxInfo(form, "Transaction Failed!");
             }
             connection.close();
             set.close();

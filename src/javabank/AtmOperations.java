@@ -153,4 +153,25 @@ public class AtmOperations {
         }
         return isValid;
     }
+
+    public boolean updateAtmPin(int pin) {
+        boolean isUpdated = false;
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+            String updateQuery = "UPDATE atm SET pin=? WHERE email=?";
+            PreparedStatement statement = connection.prepareStatement(updateQuery);
+            statement.setInt(1, pin);
+            statement.setString(2, mail);
+
+            if (statement.executeUpdate() > 0) {
+                isUpdated = true;
+            }
+            connection.close();
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+        }
+        return isUpdated;
+    }
 }

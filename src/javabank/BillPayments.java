@@ -164,7 +164,7 @@ public class BillPayments extends javax.swing.JFrame {
         String BillType=billType.getSelectedItem().toString();
         AccountsTableValues obj1 = new AccountsTableValues(mail, this);
         obj1.assignAccountTableValues("Savings Account");
-        int AccNo=obj1.getIntValues("accountNumber");
+        int AccNo=Integer.parseInt(billNumber.getText().trim());
         
         Transactions obj2=new Transactions(mail,this);
         
