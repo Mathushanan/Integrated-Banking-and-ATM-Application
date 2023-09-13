@@ -191,7 +191,7 @@ public class AtmPinChange extends javax.swing.JFrame {
 
     private void cancelBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtnMouseClicked
         this.dispose();
-        CustomerDashBoard obj1 = new CustomerDashBoard(mail);
+        AtmDashBoard obj1 = new AtmDashBoard(mail);
         obj1.setVisible(true);
     }//GEN-LAST:event_cancelBtnMouseClicked
 
