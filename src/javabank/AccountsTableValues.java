@@ -374,4 +374,43 @@ public class AccountsTableValues {
         }
         return isAvailable;
     }
+
+    public boolean makeAtmWithdrawl(double money, String type,int AccNo) {
+        boolean isUpdated = false;
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+            String updateQuery = "UPDATE accounts SET balance=? WHERE accountNumber=? && type=?";
+            PreparedStatement statement = connection.prepareStatement(updateQuery);
+
+            String selectQuery = "SELECT balance FROM accounts WHERE accountNumber=? && type=?";
+            PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
+            selectStatement.setInt(1, AccNo);
+            selectStatement.setString(2, type);
+
+            double Balance = 0;
+
+            ResultSet set = selectStatement.executeQuery();
+            if (set.next()) {
+                Balance = set.getDouble(1);
+            }
+
+            statement.setDouble(1, Balance - money);
+            statement.setInt(2, AccNo);
+            statement.setString(3, type);
+
+            if (statement.executeUpdate() > 0) {
+                isUpdated = true;
+            }
+            set.close();
+            connection.close();
+
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+
+        }
+        return isUpdated;
+
+    }
 }

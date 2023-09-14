@@ -133,17 +133,24 @@ public class AtmSavingsWithdrawl extends javax.swing.JFrame {
 
     private void submitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnMouseClicked
         AtmOperations obj1 = new AtmOperations(mail, this);
-        AccountsTableValues obj2=new AccountsTableValues(mail,this);
-        
+        AccountsTableValues obj2 = new AccountsTableValues(mail, this);
+        obj2.assignAccountTableValues("Savings Account");
+        Transactions obj3 = new Transactions(mail, this);
+        DateAndTime obj4 = new DateAndTime();
+
         if (amount.getText().trim().isEmpty()) {
             MessageBox messageBox = new MessageBox();
-            messageBox.getMessageBoxWar(this, "Enter your PIN!");
-        } else if(Double.parseDouble(amount.getText().trim())>obj2.getBalance("Savings Account")){
+            messageBox.getMessageBoxWar(this, "Enter the amount!");
+        } else if (Double.parseDouble(amount.getText().trim()) > obj2.getBalance("Savings Account")) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Your account balance is low!");
-        }else{
+        } else if (obj2.makeAtmWithdrawl(Double.parseDouble(amount.getText().trim()), "Savings Account", obj2.getIntValues("accountNumber")) && obj3.makeMoneyTransaction(obj2.getIntValues("accountNumber"), Double.parseDouble(amount.getText().trim()), "Savings Account ATM withdrawl", obj4.getDateAndTime())) {
+            amount.setText("");
             MessageBox messageBox = new MessageBox();
-            messageBox.getMessageBoxWar(this, "Invalid PIN!");
+            messageBox.getMessageBoxWar(this, "Collect your money!");
+        } else {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxWar(this, "Failed to withdraw!");
         }
     }//GEN-LAST:event_submitBtnMouseClicked
 

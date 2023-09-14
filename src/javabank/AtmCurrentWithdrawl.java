@@ -1,12 +1,12 @@
-
 package javabank;
 
 public class AtmCurrentWithdrawl extends javax.swing.JFrame {
 
-  private String mail;
+    private String mail;
+
     public AtmCurrentWithdrawl(String mail) {
         initComponents();
-        this.mail=mail;
+        this.mail = mail;
     }
 
     @SuppressWarnings("unchecked")
@@ -132,28 +132,27 @@ public class AtmCurrentWithdrawl extends javax.swing.JFrame {
 
     private void submitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnMouseClicked
         AtmOperations obj1 = new AtmOperations(mail, this);
-        AccountsTableValues obj2=new AccountsTableValues(mail,this);
+        AccountsTableValues obj2 = new AccountsTableValues(mail, this);
         obj2.assignAccountTableValues("Current Account");
-        Transactions obj3=new Transactions(mail,this);
-        DateAndTime obj4=new DateAndTime();
-        
-        
+        Transactions obj3 = new Transactions(mail, this);
+        DateAndTime obj4 = new DateAndTime();
+
         if (amount.getText().trim().isEmpty()) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Enter the amount!");
-        }else if(Double.parseDouble(amount.getText().trim())>obj2.getBalance("Current Account")){
+        } else if (Double.parseDouble(amount.getText().trim()) > obj2.getBalance("Current Account")) {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Your account balance is low!");
-        }else if(obj2.updateTransferFunds(Double.parseDouble(amount.getText().trim()), mail, obj2.getIntValues("accountNumber")) && obj3.makeMoneyTransaction(obj2.getIntValues("accountNumber"), Double.parseDouble(amount.getText().trim()), "Current Account ATM withdrawl", obj4.getDateAndTime())){
+        } else if (obj2.makeAtmWithdrawl(Double.parseDouble(amount.getText().trim()), "Current Account", obj2.getIntValues("accountNumber")) && obj3.makeMoneyTransaction(obj2.getIntValues("accountNumber"), Double.parseDouble(amount.getText().trim()), "Current Account ATM withdrawl", obj4.getDateAndTime())) {
+            amount.setText("");
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Collect your money!");
-        }else{
+        } else {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Failed to withdraw!");
         }
     }//GEN-LAST:event_submitBtnMouseClicked
 
-  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
