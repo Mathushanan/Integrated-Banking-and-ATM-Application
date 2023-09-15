@@ -195,5 +195,29 @@ public class Transactions {
         }
         return isInserted;
     }
+    public boolean updateCdmDepositTransaction(double Amount,String NIC,String Mail){
+        boolean isInserted=false;
+        try{
+            DatabaseConnection con=new DatabaseConnection();
+            Connection connection=con.createConnection();
+            String insertQuery="INSERT INTO transaction (email,accountNumber,amount,type,dateAndTime) VALUES (?,?,?,?,?)";
+            PreparedStatement statement=connection.prepareStatement(insertQuery);
+            statement.setString(1,Mail);
+            statement.setString(2,NIC);
+            statement.setDouble(3, Amount);
+            statement.setString(4,"CDM deposit");
+            DateAndTime date=new DateAndTime();
+            statement.setString(5, date.getDateAndTime());
+            
+            if(statement.executeUpdate()>0){
+                isInserted=true;
+            }
+            connection.close();
+        }catch(Exception ex){
+            MessageBox messageBox=new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+        }
+        return isInserted;
+    }
 
 }

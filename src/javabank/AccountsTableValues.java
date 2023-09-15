@@ -21,6 +21,10 @@ public class AccountsTableValues {
         this.form = form;
     }
 
+    public AccountsTableValues() {
+
+    }
+
     public void assignAccountTableValues(String Type) {
 
         try {
@@ -257,7 +261,7 @@ public class AccountsTableValues {
 
             PreparedStatement statement = connection.prepareStatement(selectQuery);
             statement.setInt(1, AccNo);
-            statement.setString(2, type);
+            statement.setString(2, Type);
 
             ResultSet set = statement.executeQuery();
 
@@ -274,6 +278,29 @@ public class AccountsTableValues {
         }
 
         return isAvailable;
+    }
+
+    public String getAccountMail(int AccNo) {
+        String mail = "";
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+            String selectQuery = "SELECT email FROM accounts WHERE accountNumber=?";
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            statement.setInt(1, AccNo);
+
+            ResultSet set = statement.executeQuery();
+            if (set.next()) {
+                mail = set.getString("email");
+            }
+            set.close();
+            connection.close();
+
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+        }
+        return mail;
     }
 
     public boolean makeBillPayment(String mail, double Amount) {
@@ -375,7 +402,7 @@ public class AccountsTableValues {
         return isAvailable;
     }
 
-    public boolean makeAtmWithdrawl(double money, String type,int AccNo) {
+    public boolean makeAtmWithdrawl(double money, String type, int AccNo) {
         boolean isUpdated = false;
         try {
             DatabaseConnection con = new DatabaseConnection();
@@ -411,6 +438,41 @@ public class AccountsTableValues {
 
         }
         return isUpdated;
+
+    }
+
+    public boolean makeCdmDeposit(int AccNo, double amount) {
+        boolean isDeposited = false;
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+            String updateQuery = "UPDATE accounts SET balance=? WHERE accountNumber=?";
+            PreparedStatement statement = connection.prepareStatement(updateQuery);
+
+            String selectQuery = "SELECT balance FROM accounts WHERE accountNumber=? && type=?";
+            PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
+            selectStatement.setInt(1, AccNo);
+            selectStatement.setString(2, type);
+
+            double Balance = 0;
+
+            ResultSet set = selectStatement.executeQuery();
+            if (set.next()) {
+                Balance = set.getDouble(1);
+            }
+            statement.setDouble(1, Balance + amount);
+            statement.setInt(2, AccNo);
+
+            if (statement.executeUpdate() > 0) {
+                isDeposited = true;
+            }
+            set.close();
+            connection.close();
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+        }
+        return isDeposited;
 
     }
 }

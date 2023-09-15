@@ -55,6 +55,58 @@ public class UserTableValues {
 
     }
 
+    public UserTableValues() {
+
+    }
+
+    public boolean isNicAvailable(String NIC) {
+        boolean isAvailable = false;
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+            String selectQuery = "SELECT COUNT(*) FROM users WHERE nic=?";
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            statement.setString(1, NIC);
+            ResultSet set = statement.executeQuery();
+
+            if (set.next()) {
+                if (set.getInt(1) > 0) {
+                    isAvailable = true;
+                }
+            }
+            set.close();
+            connection.close();
+
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+        }
+        return isAvailable;
+    }
+
+    public String getMail(String NIC) {
+        String Mail="";
+        try {
+            DatabaseConnection con = new DatabaseConnection();
+            Connection connection = con.createConnection();
+            String selectQuery = "SELECT email FROM users WHERE nic=?";
+            PreparedStatement statement = connection.prepareStatement(selectQuery);
+            statement.setString(1, NIC);
+
+            ResultSet set = statement.executeQuery();
+            if (set.next()) {
+                Mail = set.getString("email");
+            }
+            set.close();
+            connection.close();
+            
+        } catch (Exception ex) {
+            MessageBox messageBox = new MessageBox();
+            messageBox.getMessageBoxErr(form, ex.getMessage());
+        }
+        return Mail;
+    }
+
     public String getStringValue(String key) {
         if (key == "userName") {
             return userName;
@@ -111,7 +163,7 @@ public class UserTableValues {
 
     public boolean isUserAvailable(String mail, String password) {
         boolean isAvailable = false;
-        
+
         try {
             DatabaseConnection con = new DatabaseConnection();
             Connection connection = con.createConnection();
@@ -135,19 +187,19 @@ public class UserTableValues {
 
                     if (passSet.next()) {
                         if (passSet.getInt(1) > 0) {
-                            isAvailable=true;
+                            isAvailable = true;
                         }
                     }
                     passSet.close();
                     connection.close();
 
-                } 
+                }
             }
             connection.close();
             selectSet.close();
 
         } catch (Exception ex) {
-            MessageBox messageBox=new MessageBox();
+            MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxErr(form, ex.getMessage() + "!");
         }
         return isAvailable;

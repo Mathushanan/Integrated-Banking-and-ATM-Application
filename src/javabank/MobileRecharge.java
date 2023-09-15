@@ -187,7 +187,7 @@ public class MobileRecharge extends javax.swing.JFrame {
             messageBox.getMessageBoxWar(this, "Your acoount balance is low!");
         }else if(obj1.makeMobileRecharge(Double.parseDouble(reloadAmount))&&obj2.updateMobileRechargeTransaction(Double.parseDouble(reloadAmount), number)){
             MessageBox messageBox = new MessageBox();
-            messageBox.getMessageBoxWar(this, "Reload succefully completed!");
+            messageBox.getMessageBoxInfo(this, "Reload succefully completed!");
             amount.setText("");
             mobileNumber.setText("");
         }else{

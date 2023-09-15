@@ -229,7 +229,7 @@ public class MyProfile extends javax.swing.JFrame {
       userName.setText(obj1.getStringValue("userName"));
       System.out.print(obj1.getStringValue("userName"));
       mobile.setText(obj1.getStringValue("mobile"));
-      address.setText(obj1.getStringValue("adddress"));
+      address.setText(obj1.getStringValue("address"));
       dob.setText(obj1.getStringValue("dateOfBirth"));
       firstName.setText(obj1.getStringValue("firstName"));
       lastName.setText(obj1.getStringValue("lastName"));

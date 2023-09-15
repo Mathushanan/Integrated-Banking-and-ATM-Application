@@ -146,7 +146,11 @@ public class AtmCurrentWithdrawl extends javax.swing.JFrame {
         } else if (obj2.makeAtmWithdrawl(Double.parseDouble(amount.getText().trim()), "Current Account", obj2.getIntValues("accountNumber")) && obj3.makeMoneyTransaction(obj2.getIntValues("accountNumber"), Double.parseDouble(amount.getText().trim()), "Current Account ATM withdrawl", obj4.getDateAndTime())) {
             amount.setText("");
             MessageBox messageBox = new MessageBox();
-            messageBox.getMessageBoxWar(this, "Collect your money!");
+            messageBox.getMessageBoxInfo(this, "Collect your money!");
+            this.dispose();
+            AtmLogin obj5=new AtmLogin();
+            obj5.setVisible(true);
+            
         } else {
             MessageBox messageBox = new MessageBox();
             messageBox.getMessageBoxWar(this, "Failed to withdraw!");
